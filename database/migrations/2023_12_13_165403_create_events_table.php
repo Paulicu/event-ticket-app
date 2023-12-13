@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->id(); // Cheia Primara - Auto Increment
+            $table->id();
 
             $table->string('titlu', 50);
             $table->string('descriere', 200);
@@ -24,9 +24,9 @@ return new class extends Migration
 
             $table->timestamps();
 
-            // Cheile straine:
-            $table->foreign('ID_PARTENER')->references('ID')->on('parteners');
-            $table->foreign('ID_SPONSOR')->references('ID')->on('sponsors');
+            // Chei Straine:
+            $table->foreign('ID_PARTENER')->references('id')->on('parteners');
+            $table->foreign('ID_SPONSOR')->references('id')->on('sponsors');
         });
     }
 

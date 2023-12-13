@@ -14,28 +14,24 @@ class Event extends Model
         'descriere',
         'date',
         'contact',
+        'locatie',
         'ID_PARTENER',
         'ID_SPONSOR',
-        'locatie',
     ];
 
     protected $casts = [
-        'date' => 'datetime', // Convertim automat coloana 'date' la un obiect DateTime
+        'date' => 'datetime',
     ];
 
-    // Relatia cu Partener:
-    /*
+    // Relatie one-to-many cu Partener:
     public function partener()
     {
         return $this->belongsTo(Partener::class, 'ID_PARTENER');
     }
-    */
 
-    // Relatia cu Sponsor:
-    /*
+    // Relatie one-to-many cu Sponsor:
     public function sponsor()
     {
         return $this->belongsTo(Sponsor::class, 'ID_SPONSOR');
     }
-    */
 }
