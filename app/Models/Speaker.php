@@ -14,4 +14,10 @@ class Speaker extends Model
         'prenume',
         'descriere',
     ];
+
+    // Relatie one-to-many cu Booking:
+    public function bookings()
+    {
+        return $this->hasMany(Booking::class, 'ID_SPEAKER');
+    }
 }

@@ -1,0 +1,35 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('bookings', function (Blueprint $table) {
+            $table->id();
+
+            $table->unsignedBigInteger('ID_SPEAKER');
+            $table->unsignedBigInteger('ID_EVENT');
+
+            $table->timestamps();
+
+            // Chei straine:
+            $table->foreign('ID_SPEAKER')->references('id')->on('speakers');
+            $table->foreign('ID_EVENT')->references('id')->on('events');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('bookings');
+    }
+};
