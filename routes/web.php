@@ -6,6 +6,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\SponsorController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\SpeakerController;
+use App\Http\Controllers\BookingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,4 @@ Route::resource('partners', PartnerController::class);
 Route::resource('sponsors', SponsorController::class);
 Route::resource('tickets', TicketController::class);
 Route::resource('speakers', SpeakerController::class);
+Route::resource('bookings', BookingController::class);
