@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\SponsorController;
+use App\Http\Controllers\TicketController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,4 @@ Route::get('/', function () {
 Route::resource('events', EventController::class);
 Route::resource('partners', PartnerController::class);
 Route::resource('sponsors', SponsorController::class);
+Route::resource('tickets', TicketController::class);
