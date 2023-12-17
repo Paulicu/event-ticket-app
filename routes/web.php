@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\SponsorController;
@@ -19,13 +20,16 @@ use App\Http\Controllers\BookingController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::group(['middleware' => 'auth'], function()
+{
+    Route::resource('events', EventController::class);
+    Route::resource('partners', PartnerController::class);
+    Route::resource('sponsors', SponsorController::class);
+    Route::resource('tickets', TicketController::class);
+    Route::resource('speakers', SpeakerController::class);
+    Route::resource('bookings', BookingController::class);
 });
 
-Route::resource('events', EventController::class);
-Route::resource('partners', PartnerController::class);
-Route::resource('sponsors', SponsorController::class);
-Route::resource('tickets', TicketController::class);
-Route::resource('speakers', SpeakerController::class);
-Route::resource('bookings', BookingController::class);
