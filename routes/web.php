@@ -22,7 +22,7 @@ use App\Http\Controllers\BookingController;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('/');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['middleware' => 'auth'], function()
@@ -32,6 +32,10 @@ Route::group(['middleware' => 'auth'], function()
     Route::resource('sponsors', SponsorController::class);
     Route::resource('tickets', TicketController::class);
     Route::resource('speakers', SpeakerController::class);
-    Route::resource('bookings', BookingController::class);
+    Route::resource('bookings', BookingController::class);    
 });
 
+Route::get('cart', 'TicketController@cart'); //cos
+Route::get('add-to-cart/{id}', 'TicketController@addToCart');//adaug in cos
+Route::patch('update-cart', 'TicketController@updateCos'); //modific cos
+Route::delete('remove-from-cart', 'TicketController@remove');//sterg din cos

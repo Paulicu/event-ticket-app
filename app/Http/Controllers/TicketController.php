@@ -103,4 +103,79 @@ class TicketController extends Controller
         Ticket::find($id)->delete();
         return redirect()->route('tickets.index')->with('success','Ticket removed successfully');
     }
+
+    // COS:
+    public function cart()
+    {
+        return view('cart');
+    }
+   
+    public function addToCart($id)
+    {
+        $product = Ticket::find($id);
+        if(!$product) 
+        {
+            abort(404);
+        }
+
+        $cart = session()->get('cart');
+
+        // dacă cart este gol se pune primul product
+        if(!$cart) 
+        {
+            $cart = 
+            [
+                $id => [
+                    "name" => $product->name,
+                    "quantity" => 1,
+                    "price" => $product->price,
+                ]
+            ];
+
+            session()->put('cart', $cart);
+            return redirect()->back()->with('success', 'Bilet adaugat cu succes in cos!');
+        }
+
+        // daca cart nu este gol at verificam daca produsul exista pt a incrementa cantitate
+        if(isset($cart[$id])) 
+        {
+            $cart[$id]['quantity']++;
+            session()->put('cart', $cart);
+            return redirect()->back()->with('success', 'Bilet adaugat cu succes in cos!');
+        }
+        // daca item nu exista in cos at addaugam la cos cu quantity = 1
+        $cart[$id] = [
+            "name" => $product->name,
+            "quantity" => 1,
+            "price" => $product->price,
+        ];
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'Bilet adaugat cu succes in cos!');
+    }
+
+    public function updateCos(Request $request)
+    {
+        if($request->id and $request->quantity)
+        {
+            $cart = session()->get('cart');
+            $cart[$request->id]["quantity"] = $request->quantity;
+            session()->put('cart', $cart);
+            session()->flash('success', 'Cos modificat cu succes');
+        }
+    }
+    public function remove(Request $request)
+    {
+        if($request->id) 
+        {
+            $cart = session()->get('cart');
+            if(isset($cart[$request->id])) 
+            {
+                unset($cart[$request->id]);
+                session()->put('cart', $cart);
+            }
+            session()->flash('success', 'Bilet sters cu succes!');
+        }
+    }
+
+
 }
