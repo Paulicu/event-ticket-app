@@ -22,7 +22,9 @@ use App\Http\Controllers\BookingController;
 
 Auth::routes();
 
+Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::group(['middleware' => 'auth'], function()
 {
     Route::resource('events', EventController::class);
