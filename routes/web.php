@@ -32,10 +32,12 @@ Route::group(['middleware' => 'auth'], function()
     Route::resource('sponsors', SponsorController::class);
     Route::resource('tickets', TicketController::class);
     Route::resource('speakers', SpeakerController::class);
-    Route::resource('bookings', BookingController::class);    
+    Route::resource('bookings', BookingController::class);   
+
+    Route::get('products', [TicketController::class, 'indexProduct'])->name('products');
+    Route::get('cart', [TicketController::class, 'cart']);
+    Route::get('/add-to-cart/{id}', [TicketController::class, 'addToCart']); //adaug in cos
+    Route::patch('/update-cart', [TicketController::class, 'updateCos']); //modific cos
+    Route::delete('/remove-from-cart', [TicketController::class, 'remove']); //sterg din cos 
 });
 
-Route::get('cart', 'TicketController@cart'); //cos
-Route::get('add-to-cart/{id}', 'TicketController@addToCart');//adaug in cos
-Route::patch('update-cart', 'TicketController@updateCos'); //modific cos
-Route::delete('remove-from-cart', 'TicketController@remove');//sterg din cos

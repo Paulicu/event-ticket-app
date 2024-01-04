@@ -11,6 +11,11 @@ class TicketController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+     public function test()
+    {
+        return "Test method in TicketController";
+    }
     public function index(Request $request)
     {
         //
@@ -19,6 +24,11 @@ class TicketController extends Controller
         return view('tickets.list', compact('tickets'))->with('i', $value);
     }
 
+    public function indexProduct()
+    {
+        $products = Ticket::all();
+        return view('products', compact('products'));
+    }
     /**
      * Show the form for creating a new resource.
      */
